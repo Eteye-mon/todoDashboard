@@ -315,7 +315,7 @@ const [myTheme, setMyTheme] = useState<"light" | "dark">("light");
           <Button
             variant="ghost"
             size="icon"
-            className="w-10 h-10 text-sidebar-foreground hover:bg-sidebar-accent"
+            className="w-10 h-10 text-muted-foreground hover:bg-gray-500 rounded-full hover:text-white"
           >
             <LogOut className="h-[22px] w-[22px]" />
           </Button>
@@ -323,18 +323,17 @@ const [myTheme, setMyTheme] = useState<"light" | "dark">("light");
       </div>
 
       {/* Main Sidebar Content */}
-      <div className="flex-1 bg-background p-6 overflow-y-auto">
+      <div className="flex-1 bg-background p-6 overflow-y-auto w-[318px]">
         {/* Header */}
         <div className="flex items-center justify-between mb-3">
-          <h1 className="text-3xl font-bold text-foreground">
+          <h1 className="text-[30px] font-bold text-foreground">
             {currentContent.title}
           </h1>
           <Button
-            size="icon"
             variant="outline"
-            className="rounded-full bg-transparent"
+            className="rounded-full bg-[#1C1D2214] w-[28px] h-[28px]"
           >
-            <Plus className="h-4 w-4" />
+            <Plus className="h-4 w-4 text-[#1C1D22]" />
           </Button>
         </div>
 
@@ -342,13 +341,13 @@ const [myTheme, setMyTheme] = useState<"light" | "dark">("light");
           <div key={sectionIndex} className="mb-3">
             {section.type === "single" ? (
               <div className="flex items-center justify-between py-3 text-muted-foreground hover:text-foreground cursor-pointer">
-                <span className="text-lg">{section.name}</span>
+                <span className="text-[16px]">{section.name}</span>
                 {section.hasChevron && <ChevronRight className="h-4 w-4" />}
               </div>
             ) : section.type === "timeline" ? (
               <div>
-                <div className="flex items-center justify-between w-full py-2 mb-4">
-                  <h2 className="text-xl font-semibold text-foreground">
+                <div className="flex items-center justify-between w-full py-2">
+                  <h2 className="text-[16px] font-semibold text-foreground">
                     {section.name}
                   </h2>
                   {tasksOpen ? (
@@ -409,7 +408,9 @@ const [myTheme, setMyTheme] = useState<"light" | "dark">("light");
                         item.type === "project" && setActiveItem(item.name)
                       }
                     >
-                      <span>{item.name}</span>
+                      <span className="text-[#1C1D2280] dark:text-muted-foreground text-[16px]">
+                        {item.name}
+                      </span>
                       {item.count && (
                         <span className="text-sm">({item.count})</span>
                       )}
@@ -422,14 +423,14 @@ const [myTheme, setMyTheme] = useState<"light" | "dark">("light");
         ))}
 
         {/* Theme Toggle Text */}
-        <div className="mt-auto pt-8 border-t border-border">
+        <div className="mt-auto pt-8 ">
           <div
-            className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-full p-1 shadow cursor-pointer w-48 relative h-[42px]"
+            className="flex items-center bg-gray-100 dark:bg-[#2b2c30] rounded-full p-1 shadow cursor-pointer w-full  relative h-[42px]"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           >
             {/* Highlighted Slider */}
             <div
-              className={`absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-white h-[34px] shadow transition-all duration-300 ease-in-out ${
+              className={`absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-white dark:bg-[#38393c] h-[34px] shadow transition-all duration-300 ease-in-out ${
                 theme === "light" ? "left-1" : "left-[calc(50%+3px)]"
               }`}
             ></div>
@@ -437,7 +438,9 @@ const [myTheme, setMyTheme] = useState<"light" | "dark">("light");
             {/* Light option */}
             <div
               className={`flex-1 flex items-center justify-center gap-1 z-10 ${
-                theme === "light" ? "text-black font-semibold" : "text-gray-400"
+                theme === "light"
+                  ? "text-black font-semibold"
+                  : "text-[#959597]"
               }`}
             >
               <Sun className="h-4 w-4" />
@@ -448,7 +451,7 @@ const [myTheme, setMyTheme] = useState<"light" | "dark">("light");
             <div
               className={`flex-1 flex items-center justify-center gap-1 z-10 ${
                 theme === "dark"
-                  ? "text-black dark:text-black font-semibold"
+                  ? "text-black dark:text-white font-semibold"
                   : "text-gray-400"
               }`}
             >

@@ -15,31 +15,38 @@ export function TimelineTasks({ className }: TimelineTasksProps) {
   ];
 
   return (
-    <div className={cn("relative py-2", className)}>
+    <div className={cn("relative", className)}>
       {/* Vertical timeline line */}
-      <div className="absolute left-3 top-0 bottom-0 w-px bg-gray-300"></div>
+      <div className="absolute left-3 top-1 bottom-1 w-px bg-gray-300"></div>
 
       {taskSteps.map((step, index) => (
-        <div key={index} className="relative flex items-center py-4">
+        <div key={index} className="relative flex items-center py-2">
           {/* Horizontal connector line */}
-          <div className="absolute left-3 w-6 h-px bg-gray-300"></div>
+          <div className="absolute left-3 w-4 h-px bg-gray-300"></div>
 
           {/* Step content with background for active state */}
           <div
             className={cn(
               "ml-10 px-3 py-1 rounded-full flex items-center justify-between ",
-              step.isActive && "bg-gray-100"
+              step.isActive && "bg-gray-100 dark:bg-[#2b2c30]"
             )}
           >
             <span
               className={cn(
-                "text-sm font-medium",
-                step.isActive ? "text-black" : "text-gray-500"
+                "text-[14px] font-medium",
+                step.isActive ? "text-black dark:text-white" : "text-gray-500"
               )}
             >
               {step.name}
             </span>
-            <span className="text-sm text-gray-500">({step.count})</span>
+            <span
+              className={cn(
+                "text-[14px] font-medium ms-1",
+                step.isActive ? "text-black dark:text-white" : "text-gray-500"
+              )}
+            >
+              ({step.count})
+            </span>
           </div>
         </div>
       ))}

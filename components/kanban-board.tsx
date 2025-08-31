@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { CirclePlus, Plus } from "lucide-react";
 import { TaskCard } from "./task-card";
 
 const tasks = {
@@ -22,11 +22,7 @@ const tasks = {
       progress: 4,
       progressColor: "orange" as const,
       date: "25 Aug 2022",
-      avatars: [
-        "/diverse-group-collaborating.png",
-        "/abstract-geometric-shapes.png",
-        "/abstract-geometric-shapes.png",
-      ],
+      avatars: ["/images/avatar1.png", "/images/avatar2.png"],
     },
     {
       title: "Design few mobile screens",
@@ -44,10 +40,7 @@ const tasks = {
       progress: 2,
       progressColor: "red" as const,
       date: "27 Aug 2022",
-      avatars: [
-        "/abstract-geometric-shapes.png",
-        "/abstract-geometric-shapes.png",
-      ],
+      avatars: ["/images/avatar1.png", "/images/avatar2.png"],
     },
   ],
   inProgress: [
@@ -57,10 +50,7 @@ const tasks = {
       progress: 3,
       progressColor: "orange" as const,
       date: "12 Nov 2022",
-      avatars: [
-        "/abstract-geometric-shapes.png",
-        "/abstract-geometric-shapes.png",
-      ],
+      avatars: ["/images/avatar1.png", "/images/avatar2.png"],
     },
     {
       title: "Create brand guideline",
@@ -78,10 +68,7 @@ const tasks = {
       progress: 4,
       progressColor: "red" as const,
       date: "14 Nov 2022",
-      avatars: [
-        "/abstract-geometric-pattern.png",
-        "/abstract-geometric-shapes.png",
-      ],
+      avatars: ["/images/avatar1.png", "/images/avatar2.png"],
     },
     {
       title: "Create ui kit for layout",
@@ -121,10 +108,7 @@ const tasks = {
       progress: 10,
       progressColor: "green" as const,
       date: "8 Jan 2022",
-      avatars: [
-        "/user18-abstract-geometric.png",
-        "/user19-abstract-geometric.png",
-      ],
+      avatars: ["/images/avatar1.png", "/images/avatar2.png"],
     },
   ],
 };
@@ -161,27 +145,31 @@ export function KanbanBoard() {
       </div>
 
       {/* Kanban Columns */}
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* To Do Column */}
-        <div className="border-[2px] border-dashed border-muted-foreground/25 rounded-[12px] p-3">
+        <div className="border-[2px] border-dashed border-muted-foreground/25 rounded-[12px] p-3 max-w-[352px]">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-medium text-foreground">To do (4)</h3>
-            <Button variant="ghost" size="icon" className="h-6 w-6">
-              <Plus className="h-4 w-4" />
-            </Button>
+            <h3 className="font-medium text-[#1C1D2280] dark:text-foreground text-[14px]">
+              To do (4)
+            </h3>
+            <div className="flex items-center gap-1 cursor-pointer">
+              <CirclePlus className=" text-[#1C1D2214] w-[18px] h-[18px]" />
+              <span className="text-[14px] text-[#1C1D22]">Add New Task</span>
+            </div>
           </div>
           <div className="space-y-3">
             {tasks.todo.map((task, index) => (
               <TaskCard key={index} {...task} />
             ))}
-            
           </div>
         </div>
 
         {/* In Progress Column */}
-        <div className="border-[2px] border-dashed border-muted-foreground/25 rounded-[12px] p-3">
+        <div className="border-[2px] border-dashed border-muted-foreground/25 rounded-[12px] p-3 max-w-[352px]">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-medium text-foreground">In progress (4)</h3>
+            <h3 className="font-medium text-[#1C1D2280] dark:text-foreground text-[14px]">
+              In progress (4)
+            </h3>
             <Button variant="ghost" size="icon" className="h-6 w-6">
               <Plus className="h-4 w-4" />
             </Button>
@@ -190,13 +178,14 @@ export function KanbanBoard() {
             {tasks.inProgress.map((task, index) => (
               <TaskCard key={index} {...task} />
             ))}
-         
           </div>
         </div>
 
-        <div className="border-[2px] border-dashed border-muted-foreground/25 rounded-[12px] p-3 ">
+        <div className="border-[2px] border-dashed border-muted-foreground/25 rounded-[12px] p-3  max-w-[352px]">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-medium text-foreground">Done (3)</h3>
+            <h3 className="font-medium text-[#1C1D2280] dark:text-foreground text-[14px]">
+              Done (3)
+            </h3>
             <Button variant="ghost" size="icon" className="h-6 w-6">
               <Plus className="h-4 w-4" />
             </Button>
