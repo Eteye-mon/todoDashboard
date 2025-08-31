@@ -5,7 +5,11 @@ import { GeistMono } from "geist/font/mono"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Suspense } from "react"
 import "./globals.css"
-
+import { Exo_2 } from "next/font/google"
+const exo2 = Exo_2({
+  subsets: ["latin"],
+  variable: "--font-exo2",
+})
 export const metadata: Metadata = {
   title: "Sidebar App",
   description: "Modern sidebar component with shadcn/ui",
@@ -19,14 +23,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className={`font-sans ${exo2.variable}`}>
         <Suspense fallback={null}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             {children}
           </ThemeProvider>
           {/* <Analytics /> */}
         </Suspense>
       </body>
     </html>
-  )
+  );
 }
