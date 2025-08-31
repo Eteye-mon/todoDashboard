@@ -2,7 +2,7 @@
 
 import { Canvas } from "@react-three/fiber";
 import { Text3D, OrbitControls, Environment } from "@react-three/drei";
-import { useRef } from "react";
+import { useRef, Suspense } from "react";
 import { useFrame } from "@react-three/fiber";
 import type * as THREE from "three";
 
@@ -81,20 +81,26 @@ export function Tomas3DBackground() {
         camera={{ position: [0, 5, 8], fov: 60 }}
         style={{ background: "transparent" }}
       >
-        <ambientLight intensity={0.4} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
-        <pointLight position={[-10, -10, -5]} intensity={0.5} color="#4f46e5" />
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.4} />
+          <directionalLight position={[10, 10, 5]} intensity={1} />
+          <pointLight
+            position={[-10, -10, -5]}
+            intensity={0.5}
+            color="#4f46e5"
+          />
 
-        <ChessBoard />
-        <RotatingTomasText />
+          <ChessBoard />
+          <RotatingTomasText />
 
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          autoRotate
-          autoRotateSpeed={0.5}
-        />
-        <Environment preset="studio" />
+          <OrbitControls
+            enableZoom={false}
+            enablePan={false}
+            autoRotate
+            autoRotateSpeed={0.5}
+          />
+          <Environment preset="studio" />
+        </Suspense>
       </Canvas>
     </div>
   );

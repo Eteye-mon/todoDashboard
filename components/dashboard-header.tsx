@@ -57,7 +57,7 @@ export function DashboardHeader() {
 
         {/* User Avatar */}
         <Avatar className="h-8 w-8">
-          <AvatarImage src="/images/profile-img.png" alt="Vincent" />
+          <AvatarImage src="/images/profileimg.png" alt="Vincent" />
           <AvatarFallback>V</AvatarFallback>
         </Avatar>
       </div>

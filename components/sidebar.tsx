@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Collapsible,
@@ -36,8 +36,18 @@ export function Sidebar({ className }: SidebarProps) {
   const [tasksOpen, setTasksOpen] = useState(true);
   const [activeNavItem, setActiveNavItem] = useState("Projects");
   const [activeItem, setActiveItem] = useState("Design system");
-  const { theme, setTheme } = useTheme();
-const [myTheme, setMyTheme] = useState<"light" | "dark">("light");
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null; 
+  }
+
+  const activeTheme = resolvedTheme;
 
   const navigationItems = [
     { icon: Box, label: "Projects" },
@@ -426,7 +436,7 @@ const [myTheme, setMyTheme] = useState<"light" | "dark">("light");
         <div className="mt-auto pt-8 ">
           <div
             className="flex items-center bg-gray-100 dark:bg-[#2b2c30] rounded-full p-1 shadow cursor-pointer w-full  relative h-[42px]"
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            onClick={() => setTheme(activeTheme === "light" ? "dark" : "light")}
           >
             {/* Highlighted Slider */}
             <div
@@ -437,10 +447,8 @@ const [myTheme, setMyTheme] = useState<"light" | "dark">("light");
 
             {/* Light option */}
             <div
-              className={`flex-1 flex items-center justify-center gap-1 z-10 ${
-                theme === "light"
-                  ? "text-black font-semibold"
-                  : "text-[#959597]"
+              className={`flex-1 flex items-center justify-center gap-1 z-10 font-semibold ${
+                theme === "light" ? "text-black " : "text-[#959597]"
               }`}
             >
               <Sun className="h-4 w-4" />
