@@ -182,10 +182,16 @@ export default function KanbanBoard() {
             <Server size={10} />
             <span className="font-medium">Board view</span>
           </div>
-          <Button variant="ghost" size="sm" className="text-muted-foreground">
-            <Plus className=" mr-1" />
-            Add view
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-[18px] w-[18px]  rounded-full bg-[#1C1D2214] dark:bg-white dark:text-muted-foreground"
+            >
+              <Plus className="h-2 w-2 text-gray-400 dark:text-black" />
+            </Button>
+            <span>Add View</span>
+          </div>
         </div>
 
         <div className="flex items-center space-x-2">
@@ -245,9 +251,16 @@ export default function KanbanBoard() {
                     <h3 className="font-medium text-[#1C1D2280] dark:text-foreground text-[14px] capitalize">
                       {colId.replace(/([A-Z])/g, " $1")} ({colTasks.length})
                     </h3>
-                    <Button variant="ghost" size="icon" className="h-6 w-6">
-                      <Plus className="h-4 w-4" />
-                    </Button>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-[18px] w-[18px]  rounded-full bg-[#1C1D2214] dark:bg-white dark:text-muted-foreground"
+                      >
+                        <Plus className="h-2 w-2 text-gray-400 dark:text-black" />
+                      </Button>
+                      <span>Add Task</span>
+                    </div>
                   </div>
 
                   <div className="space-y-3">
