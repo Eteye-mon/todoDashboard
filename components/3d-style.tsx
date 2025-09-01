@@ -1,63 +1,64 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { Text3D, OrbitControls, Environment } from "@react-three/drei";
 import { useRef, Suspense } from "react";
-import { useFrame } from "@react-three/fiber";
-import type * as THREE from "three";
+import * as THREE from "three";
 
-function ChessBoard() {
-  const boardRef = useRef<THREE.Group>(null);
-
-  useFrame((state) => {
-    if (boardRef.current) {
-      boardRef.current.rotation.y =
-        Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
-    }
-  });
-
-  const squares = [];
-  const boardSize = 8;
-  const squareSize = 1;
-
-  for (let x = 0; x < boardSize; x++) {
-    for (let z = 0; z < boardSize; z++) {
-      const isBlack = (x + z) % 2 === 1;
-      squares.push(
-        <mesh
-          key={`${x}-${z}`}
-          position={[
-            (x - boardSize / 2) * squareSize + squareSize / 2,
-            -2,
-            (z - boardSize / 2) * squareSize + squareSize / 2,
-          ]}
-        >
-          <boxGeometry args={[squareSize, 0.1, squareSize]} />
-          <meshStandardMaterial color={isBlack ? "#2c2c2c" : "#f0f0f0"} />
-        </mesh>
-      );
-    }
-  }
-
-  return <group ref={boardRef}>{squares}</group>;
-}
-
-function RotatingTomasText() {
-  const textRef = useRef<THREE.Group>(null);
+function FloatingTask({
+  text,
+  color,
+  position,
+}: {
+  text: string;
+  color: string;
+  position: [number, number, number];
+}) {
+  const ref = useRef<THREE.Group>(null);
 
   useFrame((state) => {
-    if (textRef.current) {
-      textRef.current.rotation.y = state.clock.elapsedTime * 0.5;
-      textRef.current.position.y =
-        Math.sin(state.clock.elapsedTime * 0.8) * 0.5;
+    if (ref.current) {
+      ref.current.rotation.y = Math.sin(state.clock.elapsedTime) * 0.3;
+      ref.current.position.y =
+        position[1] + Math.sin(state.clock.elapsedTime + position[0]) * 0.2;
     }
   });
 
   return (
-    <group ref={textRef}>
+    <group ref={ref} position={position}>
       <Text3D
-        font=""
-        size={1.5}
+        font="/fonts/helvetiker_regular.typeface.json"
+        size={0.5}
+        height={0.15}
+        curveSegments={12}
+        bevelEnabled
+        bevelThickness={0.01}
+        bevelSize={0.01}
+        bevelOffset={0}
+        bevelSegments={3}
+      >
+        {text}
+        <meshStandardMaterial color={color} metalness={0.5} roughness={0.4} />
+      </Text3D>
+    </group>
+  );
+}
+
+function TodoTitle() {
+  const ref = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+    if (ref.current) {
+      ref.current.rotation.y = state.clock.elapsedTime * 0.4;
+      ref.current.position.y = Math.sin(state.clock.elapsedTime * 1.2) * 0.4;
+    }
+  });
+
+  return (
+    <group ref={ref}>
+      <Text3D
+        font="/fonts/helvetiker_regular.typeface.json"
+        size={1.2}
         height={0.3}
         curveSegments={12}
         bevelEnabled
@@ -65,41 +66,61 @@ function RotatingTomasText() {
         bevelSize={0.02}
         bevelOffset={0}
         bevelSegments={5}
-        position={[-2.5, 0, 0]}
+        position={[-2.2, 0, 0]}
       >
-        TOMAS
+        TO-DO
         <meshStandardMaterial color="#4f46e5" metalness={0.8} roughness={0.2} />
       </Text3D>
     </group>
   );
 }
 
-export function Tomas3DBackground() {
+export function Todo3DExperience() {
   return (
     <div className="fixed inset-0 -z-10">
       <Canvas
-        camera={{ position: [0, 5, 8], fov: 60 }}
+        camera={{ position: [0, 3, 7], fov: 60 }}
         style={{ background: "transparent" }}
       >
         <Suspense fallback={null}>
-          <ambientLight intensity={0.4} />
-          <directionalLight position={[10, 10, 5]} intensity={1} />
-          <pointLight
-            position={[-10, -10, -5]}
-            intensity={0.5}
-            color="#4f46e5"
+          {/* Lights */}
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[5, 10, 5]} intensity={1.2} />
+          <pointLight position={[-5, -5, -5]} intensity={0.8} color="#4f46e5" />
+
+          {/* Center Title */}
+          <TodoTitle />
+
+          {/* Floating Tasks */}
+          <FloatingTask
+            text="✅ Buy groceries"
+            color="#10b981"
+            position={[-3, 1, -2]}
+          />
+          <FloatingTask
+            text="📚 Study React"
+            color="#f59e0b"
+            position={[2, 2, -1]}
+          />
+          <FloatingTask
+            text="💻 Build side project"
+            color="#3b82f6"
+            position={[1, -1, 1]}
+          />
+          <FloatingTask
+            text="🧘 Exercise"
+            color="#ef4444"
+            position={[-2, -0.5, 2]}
           />
 
-          <ChessBoard />
-          <RotatingTomasText />
-
+          {/* Controls */}
           <OrbitControls
             enableZoom={false}
             enablePan={false}
             autoRotate
-            autoRotateSpeed={0.5}
+            autoRotateSpeed={0.7}
           />
-          <Environment preset="studio" />
+          <Environment preset="sunset" />
         </Suspense>
       </Canvas>
     </div>
