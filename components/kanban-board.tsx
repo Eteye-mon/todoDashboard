@@ -144,35 +144,39 @@ export default function KanbanBoard() {
   const [columns, setColumns] = useState(initialTasks);
   const [position, setPosition] = useState("bottom");
 
-  function handleDragEnd(result: DropResult) {
-    const { source, destination } = result;
-    if (!destination) return;
-    if (source.droppableId === destination.droppableId) {
-      const items = Array.from(
-        columns[source.droppableId as keyof typeof columns]
-      );
-      const [reorderedItem] = items.splice(source.index, 1);
-      items.splice(destination.index, 0, reorderedItem);
+ function handleDragEnd(result: DropResult) {
+   const { source, destination } = result;
+   if (!destination) return;
 
-      setColumns({
-        ...columns,
-        [source.droppableId]: items,
-      });
-    } else {
-      const sourceItems = Array.from(columns[source.droppableId as keyof typeof columns]
-      );
-      const [movedItem] = sourceItems.splice(source.index, 1);
-      const destItems = Array.from(columns[destination.droppableId as keyof typeof columns]
-      );
-      destItems.splice(destination.index, 0, movedItem);
+   if (source.droppableId === destination.droppableId) {
+     // clone array properly
+     const items = [...columns[source.droppableId as keyof typeof columns]];
+     const [reorderedItem] = items.splice(source.index, 1);
+     items.splice(destination.index, 0, reorderedItem);
 
-      setColumns({
-        ...columns,
-        [source.droppableId]: sourceItems,
-        [destination.droppableId]: destItems,
-      });
-    }
-  }
+     setColumns({
+       ...columns,
+       [source.droppableId]: items,
+     });
+   } else {
+     const sourceItems = [
+       ...columns[source.droppableId as keyof typeof columns],
+     ];
+     const [movedItem] = sourceItems.splice(source.index, 1);
+
+     const destItems = [
+       ...columns[destination.droppableId as keyof typeof columns],
+     ];
+     destItems.splice(destination.index, 0, movedItem);
+
+     setColumns({
+       ...columns,
+       [source.droppableId]: sourceItems,
+       [destination.droppableId]: destItems,
+     });
+   }
+ }
+
 
   return (
     <div className="p-6">
