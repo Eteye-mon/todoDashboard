@@ -1,9 +1,18 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { CirclePlus, Plus } from "lucide-react";
+import { CirclePlus, MoreHorizontal, Plus, Server } from "lucide-react";
 import { TaskCard } from "./task-card";
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useState } from "react";
 const tasks = {
   todo: [
     {
@@ -59,7 +68,7 @@ const tasks = {
       progressColor: "orange" as const,
       date: "13 Nov 2022",
       comments: 2,
-      users: 13,
+      views: 13,
       avatars: [],
     },
     {
@@ -114,30 +123,60 @@ const tasks = {
 };
 
 export function KanbanBoard() {
+    const [position, setPosition] = useState("bottom");
+
   return (
     <div className="p-6">
       {/* Board Header */}
       <div className="flex items-center justify-between mb-6 border-b-2 py-2">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
+            <Server size={10} />
             <span className="font-medium">Board view</span>
           </div>
           <Button variant="ghost" size="sm" className="text-muted-foreground">
-            <Plus className="h-4 w-4 mr-1" />
+            <Plus className=" mr-1" />
             Add view
           </Button>
         </div>
 
         <div className="flex items-center space-x-2">
-          <Button variant="outline" size="sm">
+          <Button variant="ghost" size="sm">
             Filter
           </Button>
-          <Button variant="outline" size="sm">
+          <div className="flex items-center gap-3 text-[16px]">
             Sort
-          </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="h-[26px] w-[26px] -mt-1 border-[#1C1D221A] border-2 rounded-full"
+                >
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuLabel>Sort By</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuRadioGroup
+                  value={position}
+                  onValueChange={setPosition}
+                >
+                  <DropdownMenuRadioItem value="top">Z-A</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="bottom">
+                    A-Z
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="right">
+                    Latest
+                  </DropdownMenuRadioItem>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
           <Button
             size="sm"
-            className="bg-foreground text-background hover:bg-foreground/90 rounded-full"
+            className="bg-foreground dark:text-white dark:bg-[#4B69FF] text-background hover:bg-foreground/90 rounded-full"
           >
             New template
           </Button>

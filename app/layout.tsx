@@ -11,9 +11,8 @@ const exo2 = Exo_2({
   variable: "--font-exo2",
 })
 export const metadata: Metadata = {
-  title: "Sidebar App",
-  description: "Modern sidebar component with shadcn/ui",
-  generator: "v0.app",
+  title: "Todo App",
+  description: "Assessment for Tobams group",
 }
 
 export default function RootLayout({

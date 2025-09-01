@@ -5,6 +5,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export function DashboardHeader() {
     const [value, setValue] = useState("");
@@ -24,8 +38,12 @@ export function DashboardHeader() {
         ${value ? "w-[270px]" : "w-[60px] hover:w-[270px]"}
       `}
         >
-          <Search className={`absolute top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground transition-all duration-300 ${value? "left-3": "left-1/2 -translate-x-1/2 group-hover:left-3 group-hover:translate-x-0"
-          }
+          <Search
+            className={`absolute top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground transition-all duration-300 ${
+              value
+                ? "left-3"
+                : "left-1/2 -translate-x-1/2 group-hover:left-3 group-hover:translate-x-0"
+            }
         `}
           />
 
@@ -56,10 +74,51 @@ export function DashboardHeader() {
         </div>
 
         {/* User Avatar */}
-        <Avatar className="h-8 w-8">
-          <AvatarImage src="/images/profileimg.png" alt="Vincent" />
-          <AvatarFallback>V</AvatarFallback>
-        </Avatar>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Avatar className="h-8 w-8">
+              <AvatarImage src="/images/profileimg.png" alt="Vincent" />
+              <AvatarFallback>V</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56" align="start">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                Billing
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                Settings
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem>Team</DropdownMenuItem>
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
+                <DropdownMenuPortal>
+                  <DropdownMenuSubContent>
+                    <DropdownMenuItem>Email</DropdownMenuItem>
+                    <DropdownMenuItem>Message</DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>More...</DropdownMenuItem>
+                  </DropdownMenuSubContent>
+                </DropdownMenuPortal>
+              </DropdownMenuSub>
+              <DropdownMenuItem>
+                New Team
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              Log out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   );
