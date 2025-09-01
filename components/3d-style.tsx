@@ -83,37 +83,10 @@ export function Todo3DExperience() {
         style={{ background: "transparent" }}
       >
         <Suspense fallback={null}>
-          {/* Lights */}
           <ambientLight intensity={0.5} />
           <directionalLight position={[5, 10, 5]} intensity={1.2} />
           <pointLight position={[-5, -5, -5]} intensity={0.8} color="#4f46e5" />
-
-          {/* Center Title */}
           <TodoTitle />
-
-          {/* Floating Tasks */}
-          <FloatingTask
-            text="✅ Buy groceries"
-            color="#10b981"
-            position={[-3, 1, -2]}
-          />
-          <FloatingTask
-            text="📚 Study React"
-            color="#f59e0b"
-            position={[2, 2, -1]}
-          />
-          <FloatingTask
-            text="💻 Build side project"
-            color="#3b82f6"
-            position={[1, -1, 1]}
-          />
-          <FloatingTask
-            text="🧘 Exercise"
-            color="#ef4444"
-            position={[-2, -0.5, 2]}
-          />
-
-          {/* Controls */}
           <OrbitControls
             enableZoom={false}
             enablePan={false}

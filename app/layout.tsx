@@ -32,7 +32,6 @@ export default function RootLayout({
           >
             {children}
           </ThemeProvider>
-          {/* <Analytics /> */}
         </Suspense>
       </body>
     </html>

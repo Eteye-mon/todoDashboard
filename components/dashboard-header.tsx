@@ -30,7 +30,6 @@ export function DashboardHeader() {
       </h1>
 
       <div className="flex items-center space-x-4">
-        {/* Search */}
         <div
           className={`
         relative overflow-hidden 
@@ -61,19 +60,13 @@ export function DashboardHeader() {
         `}
           />
         </div>
-
-        {/* Notifications */}
         <Button variant="ghost" size="icon">
           <Bell className="h-5 w-5" />
         </Button>
-
-        {/* Date */}
         <div className="flex items-center space-x-2 text-muted-foreground">
           <Calendar className="h-4 w-4" />
           <span className="text-sm">19 May 2022</span>
         </div>
-
-        {/* User Avatar */}
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

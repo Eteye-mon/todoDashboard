@@ -1,6 +1,6 @@
 import { Sidebar } from "@/components/sidebar";
 import { DashboardHeader } from "@/components/dashboard-header";
-import { KanbanBoard } from "@/components/kanban-board";
+import KanbanBoard  from "@/components/kanban-board";
 import { Todo3DExperience } from "@/components/3d-style";
 
 export default function Home() {

@@ -16,15 +16,12 @@ export function TimelineTasks({ className }: TimelineTasksProps) {
 
   return (
     <div className={cn("relative", className)}>
-      {/* Vertical timeline line */}
       <div className="absolute left-3 top-1 bottom-1 w-px bg-gray-300"></div>
 
       {taskSteps.map((step, index) => (
         <div key={index} className="relative flex items-center py-2">
-          {/* Horizontal connector line */}
           <div className="absolute left-3 w-4 h-px bg-gray-300"></div>
 
-          {/* Step content with background for active state */}
           <div
             className={cn(
               "ml-10 px-3 py-1 rounded-full flex items-center justify-between ",

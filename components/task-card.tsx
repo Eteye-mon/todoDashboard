@@ -72,7 +72,6 @@ export function TaskCard({
             {description}
           </p>
 
-          {/* Progress */}
           <div className="mb-4">
             <div className="flex items-center justify-between mb-2">
               <div className="flex gap-2 items-center">

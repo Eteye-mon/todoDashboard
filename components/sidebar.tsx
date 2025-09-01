@@ -294,9 +294,7 @@ export function Sidebar({ className }: SidebarProps) {
 
   return (
     <div className={cn("flex h-screen bg-background", className)}>
-      {/* Left Navigation */}
       <div className="w-[90px] bg-[#000] border-r border-sidebar-border flex flex-col items-center py-4 space-y-4">
-        {/* Traffic light dots */}
         <div className="flex space-x-1 mb-4">
           <div className="w-[6px] h-[6px] rounded-full bg-[#ffffff]"></div>
           <div className="w-[6px] h-[6px] rounded-full bg-gray-400"></div>
@@ -305,7 +303,6 @@ export function Sidebar({ className }: SidebarProps) {
         <div className="py-10">
           <Logo />
         </div>
-        {/* Navigation Icons */}
         {navigationItems.map((item, index) => (
           <Button
             key={index}
@@ -332,9 +329,7 @@ export function Sidebar({ className }: SidebarProps) {
         </div>
       </div>
 
-      {/* Main Sidebar Content */}
       <div className="flex-1 bg-background p-6 overflow-y-auto w-[318px]">
-        {/* Header */}
         <div className="flex items-center justify-between mb-3">
           <h1 className="text-[30px] font-bold text-foreground">
             {currentContent.title}
@@ -432,20 +427,17 @@ export function Sidebar({ className }: SidebarProps) {
           </div>
         ))}
 
-        {/* Theme Toggle Text */}
         <div className="mt-auto pt-8 ">
           <div
             className="flex items-center bg-gray-100 dark:bg-[#2b2c30] rounded-full p-1 shadow cursor-pointer w-full  relative h-[42px]"
             onClick={() => setTheme(activeTheme === "light" ? "dark" : "light")}
           >
-            {/* Highlighted Slider */}
             <div
               className={`absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-white dark:bg-[#38393c] h-[34px] shadow transition-all duration-300 ease-in-out ${
                 theme === "light" ? "left-1" : "left-[calc(50%+3px)]"
               }`}
             ></div>
 
-            {/* Light option */}
             <div
               className={`flex-1 flex items-center justify-center gap-1 z-10 font-semibold ${
                 theme === "light" ? "text-black " : "text-[#959597]"
@@ -455,7 +447,6 @@ export function Sidebar({ className }: SidebarProps) {
               <span>Light</span>
             </div>
 
-            {/* Dark option */}
             <div
               className={`flex-1 flex items-center justify-center gap-1 z-10 ${
                 theme === "dark"
